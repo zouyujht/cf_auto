@@ -1,12 +1,10 @@
-# 这是您的 Worker 在 Cloudflare 上的默认名称。
 name = "cfauto"
-
-# 这是 Worker 的主入口文件。
 main = "_work.js"
-
-# 兼容性日期，用于锁定 Workers 运行时的版本。
 compatibility_date = "2024-03-01"
 
+# 添加以下配置
+node_compat = true  # 启用 Node.js 兼容模式
+minify = true      # 启用代码压缩
 
-# 可选：指定 Worker 的账户 ID。
-# account_id = "YOUR_ACCOUNT_ID"
+[build]
+command = ""       # 清空构建命令
