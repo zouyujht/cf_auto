@@ -37,7 +37,7 @@ jobs:
 
       # 第二步：下载指定 URL 的文件并重命名
       - name: Download and Rename File
-        run: curl -o _work.js -L "https://github.com/zouyujht/cfauto/raw/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97"
+        run: curl -o _work.js -L "https://github.com/byJoey/cfnew/raw/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97"
 
       # 第三步：配置 Git 用户信息
       - name: Configure Git
