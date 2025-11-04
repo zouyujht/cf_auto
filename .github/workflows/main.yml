@@ -19,23 +19,27 @@ jobs:
     # 指定任务运行的虚拟环境
     runs-on: ubuntu-latest
 
+    # ======================================================= #
+    # VVVVVV           【这里是需要添加的内容】           VVVVVV #
+    # ------------------------------------------------------- #
+    # 为此任务授予权限，允许它向仓库中写入内容
+    permissions:
+      contents: write
+    # ------------------------------------------------------- #
+    # ^^^^^^           【这里是需要添加的内容】           ^^^^^^ #
+    # ======================================================= #
+
     # 定义任务中的步骤 (steps)
     steps:
       # 第一步：检出 (checkout) 您自己的仓库代码
-      # 这是为了能将之后下载的文件推送到您的仓库
       - name: Checkout repository
         uses: actions/checkout@v4
 
       # 第二步：下载指定 URL 的文件并重命名
       - name: Download and Rename File
-        # 使用 run 来执行 shell 命令
-        # curl -o [保存的文件名] [文件URL]
-        # -o: 表示将输出写入文件而不是标准输出
-        # -L: 表示跟随重定向 (对于原始文件链接很重要)
         run: curl -o _work.js -L "https://github.com/zouyujht/cfauto/raw/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97"
 
       # 第三步：配置 Git 用户信息
-      # 每次提交都需要一个用户名和邮箱
       - name: Configure Git
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -44,9 +48,6 @@ jobs:
       # 第四步：提交并推送文件到您的仓库
       - name: Commit and Push if changed
         run: |
-          # 添加所有更改到暂存区 (这里主要是 _work.js 文件)
           git add _work.js
-          # 检查是否有文件变动。"git diff --staged --quiet" 如果没有变动则退出码为0，有变动则为1
-          # "||" 表示如果前一个命令失败 (即有变动)，则执行后面的命令
           git diff --staged --quiet || (git commit -m "chore: Auto sync _work.js from upstream" && git push)
           echo "Sync completed."
